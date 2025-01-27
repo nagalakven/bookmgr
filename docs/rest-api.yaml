@@ -1,0 +1,442 @@
+openapi: 3.0.3
+info:
+  title: Book Management System API
+  description: API for managing books including CRUD operations and filtering.
+  version: 1.0.0
+paths:
+  /books:
+    post:
+      summary: Add a New Book
+      description: Adds a new book to the system.
+      operationId: addBook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookWithRequiredField'
+      responses:
+        '201':
+          description: Book added successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: integer
+        '400':
+          description: Invalid request payload!
+          
+    get:
+      summary: List All Books
+      description: List all books added to the system.
+      operationId: listBooks
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum: [id, title, author, publishedDate]
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        '200':
+          description: List of books!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+                  
+  /books/{id}:
+    delete:
+      summary: Delete a book by ID
+      description: Deletes a book from the system by its unique identifier.
+      operationId: deleteBookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the book to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Book deleted successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Book not found!
+
+    put:
+      summary: Update a book by ID
+      description: Update details of the book in the system.
+      operationId: updateBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the book to be updated.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Book updated successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found!
+
+  /books/filter:
+    post:
+      summary: Filter books by criteria
+      description: Fitler books based on the specified criteria.
+      operationId: filterBooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                  description: Filter the list of books by the specified author's name.
+                genre:
+                  type: string
+                  description: Filter the list of books by the specified genre.
+                startDate:
+                  type: string
+                  format: date
+                  description: Filter books on or after the specified start date.
+                endDate:
+                  type: string
+                  format: date
+                  description: Filter books on or before the specified end date.
+                limit:
+                  type: integer
+                  description: Limits the number of results displayed. Defaults to all if not specified.
+                output:
+                  type: string
+                  enum: [full, short, json, csv, custom]
+                  description: |
+                   Defines the format of the output:
+                   - `full`: All details of the books.
+                   - `short`: Only minimal fields of the books like title, author, etc.
+                   - `json` or `csv`: Specifies the format of the data.
+                   - `custom`: Reserved for future extensions and custom format.
+      responses:
+        '200':
+          description: Filtered books!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+
+  /books/delete-by-filter:
+    post:
+      summary: Delete books by filter
+      description: Delete books from the system based on specific filter criteria.
+      operationId: deleteBooksByFilter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                  description: Delete books written by the specified author.
+                genre:
+                  type: string
+                  description: Delete books belonging to the speficied genre.
+                startDate:
+                  type: string
+                  format: date
+                  description: Delete books published on or after the specified start date.
+                endDate:
+                  type: string
+                  format: date
+                  description: Delete books published on or before the specified end date.
+      responses:
+        '200':
+          description: Books deleted successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Response message.
+                  totalDeleted:
+                    type: integer
+                    description: Number of books that were deleted.
+                  deletedBookIds:
+                    type: array
+                    items:
+                      type: integer
+                    description: List of unique identifiers of the books that were deleted.
+        '404':
+          description: No books matched the criteria!
+          
+          
+  /collections:
+    post:
+      summary: Create a Collection
+      description: Creates a new book collection.
+      operationId: createCollection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the new collection
+              required:
+                - name
+      responses:
+        '201':
+          description: Collection created successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: integer
+        '400':
+          description: Invalid request payload!
+          
+    get:
+      summary: List All Collections
+      description: Lists all collections created in the system.
+      operationId: listCollections
+      responses:
+        '200':
+          description: List of collections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+
+  /collections/{collectionId}/books:
+    post:
+      summary: Add Books to Collection
+      description: Adds one or more books to an existing collection.
+      operationId: addBooksToCollection
+      parameters:
+        - name: collectionId
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookIds:
+                  type: array
+                  items:
+                    type: integer
+                  description: A list of unique identifiers of books to be added to the collection.
+              required:
+                - bookIds
+      responses:
+        '200':
+          description: Books added to the collection successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Invalid request payload!
+        '404':
+          description: Collection not found!
+
+    delete:
+      summary: Remove Books from Collection
+      description: Removes one or more books from an existing collection.
+      operationId: deleteBooksFromCollection
+      parameters:
+        - name: collectionId
+          in: path
+          required: true
+          description: The unique identifier of the collection
+          schema:
+            type: integer
+        - name: bookIds
+          in: query
+          required: true
+          description: A list of unique identifiers of books to remove from the collection.
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+      responses:
+        '200':
+          description: Books removed from the collection successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Invalid request payload!
+        '404':
+          description: Collection not found!
+    
+    get:
+      summary: List All Books in a Collection
+      description: Lists all books in the specified collection.
+      parameters:
+        - name: collectionId
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of books in the collection!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  books:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+                  totalCount:
+                    type: integer
+        '404':
+          description: Collection not found!
+
+  /collections/{collectionId}:
+    delete:
+      summary: Delete a Collection
+      description: Deletes a collection from the system by its unique identifier.
+      operationId: deleteCollectionById
+      parameters:
+        - name: collectionId
+          in: path
+          required: true
+          description: The unique identifier of the collection to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Collection deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Collection not found!
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the book.
+        author:
+          type: string
+          description: Author of the book.
+        publishedDate:
+          type: string
+          format: date
+          description: Publication date of the book (YYYY-MM-DD).
+        publishedBy:
+          type: string
+          description: Name of the publisher of the book.
+        coAuthors:
+          type: array
+          items:
+            type: string
+            description: List of co-authors of the book.
+        genre:
+          type: string
+          description: Genre of the book.
+        description:
+          type: string
+          description: Short description of the book.
+        edition:
+          type: string
+          description: Edition of the book.
+        recommendedAge:
+          type: string
+          description: Recommended target age range for the book.
+        isbn:
+          type: string
+          description: ISBN number of the book.
+    
+    BookWithRequiredField:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          required:
+            - title
+            - author
+            - publishedDate
+          
+          
