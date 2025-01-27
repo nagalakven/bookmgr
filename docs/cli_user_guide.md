@@ -19,6 +19,7 @@ The available commands, their options, sample responses and examples on how to u
 10. [Filter Books](#filter-books)
 11. [List All Collections](#list-all-collections)
 12. [List All Books in a Collection](#list-all-books-in-a-collection)
+13. [Book Manage Command Help](#book-manager-help)
 
 --- 
 
@@ -73,6 +74,9 @@ bookmgr add-book [OPTIONS]
   *optional.* International Standar Book Number of the book.
   Example: `--isbn "978-1-945209-05-5"`
 
+**Flags:**
+  -h, --help    Show help for the add-book command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Add a New Book with Required Fields
@@ -114,6 +118,9 @@ bookmgr delete-book [OPTIONS]
   *required.* The unique identifier of the book to be deleted.
   Example: `--id 12345`
 
+**Flags:**
+  -h, --help    Show help for the delete-book command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Delete a Book by ID
@@ -149,6 +156,9 @@ bookmgr delete-books [OPTIONS]
   *optional.* Delete books published on a specific date (format: `YYYY-MM-DD`) or within an inclusive range (format: `YYYY-MM-DD` to `YYYY-MM-DD`).
   Example: `--published-date "2025-01-01"`
   Example: `--published-date "2025-01-01 to 2025-02-01"`
+
+**Flags:**
+  -h, --help    Show help for the delete-books command.
 
 #### Example Commands and Responses:
 
@@ -229,6 +239,9 @@ bookmgr update-book [OPTIONS]
   *optional.* The updated ISBN number of the book.
   Example: `--isbn "978-1-123456-78-9"`
 
+**Flags:**
+  -h, --help    Show help for the update-book command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Update Book Title and Author
@@ -263,6 +276,9 @@ bookmgr create-collection --name "New Collection"
   *required.* The name of the new collection.
   Example: `--name "My Favorites"`
 
+**Flags:**
+  -h, --help    Show help for the create-collection command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Add a New Collection
@@ -295,6 +311,9 @@ bookmgr add-books-to-collection [OPTIONS]
   *required.* A comma-separated list of book identifiers to add to the collection.
   Example: `--book-ids "12345, 67891"`
 
+**Flags:**
+  -h, --help    Show help for the add-books-to-collection command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Add Books to a Collection
@@ -326,6 +345,9 @@ bookmgr remove-books-from-collection [OPTIONS]
   *required.* A comma-separated list of book identifiers to remove from the collection.
   Example: `--book-ids "12345, 67891"`
 
+**Flags:**
+  -h, --help    Show help for the remove-books-from-collection command.
+
 #### Example Commands and Responses:
 
 ##### Example-1: Remove Books from a Collection
@@ -352,6 +374,9 @@ bookmgr delete-collection [OPTIONS]
 - `-i or --id <collection-id>`
   *required.* The unique identifier of the collection to be deleted.
   Example: `--id 67890`
+
+**Flags:**
+  -h, --help    Show help for the delete-collection command.
 
 #### Example Commands and Responses:
 
@@ -391,6 +416,9 @@ bookmgr list-books [OPTIONS]
 - `-f, --filter <criteria>`  
   *optional.* Apply a filter to list books based on specific criteria (e.g., `--filter "genre=Fiction"` or `--filter "author=Author Name"`).  
   Example: `--filter "genre=Non-fiction"`
+
+**Flags:**
+  -h, --help    Show help for the list-books command.
 
 #### Example Commands and Responses:
 
@@ -478,6 +506,8 @@ bookmgr filter-books [OPTIONS]
   *optional.* Limits the number of results displayed. Defaults to all if not specified.
   Example: `--limit 10`
 
+**Flags:**
+  -h, --help    Show help for the filter-books command.
 
 #### Example Commands and Responses:
 
@@ -528,6 +558,9 @@ List all collections created in the system.
 bookmgr list-collections
 ```
 
+**Flags:**
+  -h, --help    Show help for the list-collections command.
+
 #### Example Command and Response:
 
 ##### Example-1: List All Collections
@@ -562,6 +595,9 @@ bookmgr list-books-in-collection [OPTIONS]
   *optional.* The unique identifier of the collection to filter by.
   Example: `--id 67890`
 
+**Flags:**
+  -h, --help    Show help for the list-bools-in-collection command.
+
 #### Example Command and Response:
 
 ##### Example-1: List All Books in a Collection by Collection Name
@@ -572,11 +608,12 @@ bookmgr list-books-in-collection --name "My Favorites"
 
 **Response:**
 
+```
 ID      Title                     Author        Genre         Published Date
 -----------------------------------------------------------------------------
 12345   Book Title 1              Author 1      Fiction       2025-01-01
 56478   Another Fiction Book      Author 3      Fiction       2023-07-15
-
+```
 
 ##### Example-2: List All Books in a Collection by unique collection identifier
 
@@ -586,9 +623,46 @@ bookmgr list-books-in-collection --id 67890
 
 **Response:**
 
+```
 ID      Title                     Author        Genre         Published Date
 -----------------------------------------------------------------------------
 12345   Book Title 1              Author 1      Fiction       2025-01-01
 56478   Another Fiction Book      Author 3      Fiction       2023-07-15
+```
 
+---
 
+## Book Manager Help
+
+### Display Help for All Commands
+Display the general usage information for the bookmgr command-line tool, including available commands and their descriptions.
+
+```
+bookmgr help
+```
+
+**Response:**
+
+```
+Usage:
+  bookmgr [command]
+
+Available Commands:
+  add-book                          Add a new book to the system
+  delete-books                      Delete book/books from the system
+  update-book                       Update details of a book in the system
+  create-collection                 Create a collection in the system
+  add-collection                    Create a new collection
+  add-books-to-collection           Add books to a collection
+  remove-books-from-collection      Remove books from a collection
+  delete-collection                 Delete a collection from the system
+  filter-books                      Filter books based on author, genre, etc.
+  list-books                        List all books in the system
+  list-collections                  List all collections in the system
+  list-books-in-collection          List all books in the collection
+
+Flags:
+  -h, --help    Show help for any command
+  -v, --verbose Enable verbose output for more detailed logs
+
+```
