@@ -1,10 +1,13 @@
 package entity
 
-import "time"
+import (
+	"context"
+	"time"
+)
 
-// Book represents a book entity in the system
+// Book entity
 type Book struct {
-	ID             uint      `json:"id"`
+	ID             string    `json:"id"`
 	Title          string    `json:"title"`
 	Author         string    `json:"author"`
 	PublishedDate  time.Time `json:"published_date"`
@@ -17,4 +20,13 @@ type Book struct {
 	ISBN           string    `json:"isbn,omitempty"`
 	CreatedAt      time.Time `json:"created_at"`
 	UpdatedAt      time.Time `json:"updated_at"`
+}
+
+// BookService interface
+type BookService interface {
+	//methods
+	AddBook(ctx context.Context, book Book) (Book, error)
+	UpdateBook(ctx context.Context, updateBook Book) (Book, error)
+	DeleteBook(ctx context.Context, id string) error
+	GetBooks(ctx context.Context) ([]Book, error)
 }

@@ -26,7 +26,7 @@ paths:
                   message:
                     type: string
                   id:
-                    type: integer
+                    type: string
         '400':
           description: Invalid request payload!
           
@@ -71,7 +71,7 @@ paths:
           required: true
           description: The unique identifier of the book to delete.
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Book deleted successfully!
@@ -95,7 +95,7 @@ paths:
           required: true
           description: The unique identifier of the book to be updated.
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
@@ -205,7 +205,7 @@ paths:
                   deletedBookIds:
                     type: array
                     items:
-                      type: integer
+                      type: string
                     description: List of unique identifiers of the books that were deleted.
         '404':
           description: No books matched the criteria!
@@ -239,7 +239,7 @@ paths:
                   message:
                     type: string
                   id:
-                    type: integer
+                    type: string
         '400':
           description: Invalid request payload!
           
@@ -258,7 +258,7 @@ paths:
                   type: object
                   properties:
                     id:
-                      type: integer
+                      type: string
                     name:
                       type: string
 
@@ -273,7 +273,7 @@ paths:
           required: true
           description: The unique identifier of the collection.
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
@@ -284,7 +284,7 @@ paths:
                 bookIds:
                   type: array
                   items:
-                    type: integer
+                    type: string
                   description: A list of unique identifiers of books to be added to the collection.
               required:
                 - bookIds
@@ -313,7 +313,7 @@ paths:
           required: true
           description: The unique identifier of the collection
           schema:
-            type: integer
+            type: string
         - name: bookIds
           in: query
           required: true
@@ -321,7 +321,7 @@ paths:
           schema:
             type: array
             items:
-              type: integer
+              type: string
           style: form
           explode: true
       responses:
@@ -348,7 +348,7 @@ paths:
           required: true
           description: The unique identifier of the collection.
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: A list of books in the collection!
@@ -377,7 +377,7 @@ paths:
           required: true
           description: The unique identifier of the collection to delete.
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Collection deleted successfully.
