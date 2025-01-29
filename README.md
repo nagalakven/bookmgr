@@ -35,8 +35,8 @@ This system allows the users to:
 
 The design documents for the assignment are found in the repository under bookmgr/docs path.
 
-1. [CLI user specification](../bookmgr/docs/cli_user_guide.md)
-2. [Database design specification](../bookmgr/docs/database_design.md)
+1. [CLI user specification](docs/cli_user_guide.md)
+2. [Database design specification](docs/database_design.md)
 3. [REST API documentation](../bookmgr/docs/rest-api.md)
 4. [OpenAPI specification](../bookmgr/docs/rest-api.yaml)
 5. [Unit test results](../bookmgr/docs/tests/test_results.md)
