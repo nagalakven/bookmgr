@@ -1,0 +1,8 @@
+application:
+  name: bookmgr
+
+http:
+  port: 8080
+  readTimeout: 5
+  writeTimeout: 100
+  maxHeaderBytes: 4096

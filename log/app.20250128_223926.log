@@ -1,0 +1,37 @@
+INFO: 2025/01/28 22:39:26 Starting Bookmgr service...
+INFO: 2025/01/28 22:39:26 HTTP server params - addr[:8080] readTimeout[5000000000] writeTimeout[100000000000] maxHdrBytes[4096]
+
+INFO: 2025/01/28 22:40:09 Add Book service: book={ID: Title:Go Programming Author:Author-1 PublishedDate:2025-01-01 PublishedBy: CoAuthors: Genre: Description: Edition: RecommendedAge: ISBN: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
+
+INFO: 2025/01/28 22:40:09 Successfully added book = {ID:1250c637-4987-442d-bb85-45b0c2837b82 Title:Go Programming Author:Author-1 PublishedDate:2025-01-01 PublishedBy: CoAuthors: Genre: Description: Edition: RecommendedAge: ISBN: CreatedAt:2025-01-28 22:40:09.8671765 -0800 PST m=+43.730928701 UpdatedAt:2025-01-28 22:40:09.8671765 -0800 PST m=+43.730928701}
+
+INFO: 2025/01/28 22:40:09 Successfully added book with ID: 1250c637-4987-442d-bb85-45b0c2837b82
+INFO: 2025/01/28 22:43:46 Add Book service: book={ID: Title:Bookmgr Author:Naga PublishedDate:2022-01-01 PublishedBy:Naga CoAuthors:co-1,co-2,co-3 Genre:thriller Description:a thriller book Edition:21 RecommendedAge:10+ ISBN:4314-434-243-432 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
+
+INFO: 2025/01/28 22:43:46 Successfully added book = {ID:14b14765-166c-470f-be57-a06586cc30d1 Title:Bookmgr Author:Naga PublishedDate:2022-01-01 PublishedBy:Naga CoAuthors:co-1,co-2,co-3 Genre:thriller Description:a thriller book Edition:21 RecommendedAge:10+ ISBN:4314-434-243-432 CreatedAt:2025-01-28 22:43:46.5754829 -0800 PST m=+260.429244801 UpdatedAt:2025-01-28 22:43:46.5754829 -0800 PST m=+260.429244801}
+
+INFO: 2025/01/28 22:43:46 Successfully added book with ID: 14b14765-166c-470f-be57-a06586cc30d1
+INFO: 2025/01/28 22:44:52 Successfully fetched all exsiting books
+INFO: 2025/01/28 22:46:39 Update Book service: id=14b14765-166c-470f-be57-a06586cc30d1, book={ID: Title:Bookmgr Author:Naga PublishedDate:2022-01-01 PublishedBy:Naga CoAuthors:co-1,co-2,co-3,co-4 Genre:thriller Description:a thriller book Edition: RecommendedAge:12+ ISBN: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
+
+INFO: 2025/01/28 22:46:39 Successfully updated book = {ID:14b14765-166c-470f-be57-a06586cc30d1 Title:Bookmgr Author:Naga PublishedDate:2022-01-01 PublishedBy:Naga CoAuthors:co-1,co-2,co-3,co-4 Genre:thriller Description:a thriller book Edition: RecommendedAge:12+ ISBN: CreatedAt:2025-01-28 22:43:46.5754829 -0800 PST m=+260.429244801 UpdatedAt:2025-01-28 22:46:39.5405554 -0800 PST m=+433.386343601}
+
+INFO: 2025/01/28 22:46:39 Successfully updated book with ID: 14b14765-166c-470f-be57-a06586cc30d1
+INFO: 2025/01/28 22:47:56 Delete Book service: id=1250c637-4987-442d-bb85-45b0c2837b82
+
+INFO: 2025/01/28 22:47:56 Successfully deleted book with ID: 1250c637-4987-442d-bb85-45b0c2837b82
+INFO: 2025/01/28 22:47:56 Successfully deleted book with ID: 1250c637-4987-442d-bb85-45b0c2837b82
+INFO: 2025/01/28 22:48:39 Successfully fetched all exsiting books
+INFO: 2025/01/28 22:50:03 Add Book service: book={ID: Title:Book-1 Author:Author-1 PublishedDate: PublishedBy: CoAuthors: Genre:fiction Description: Edition: RecommendedAge: ISBN: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
+
+ERROR: 2025/01/28 22:50:03 validation failed: title, author and published date are required
+INFO: 2025/01/28 22:52:40 Update Book service: id=14b14765-166c-470f-be57-a06586cc30d1, book={ID: Title:Book-2 Author:Author-2 PublishedDate:1990-04-10 PublishedBy: CoAuthors: Genre: Description: Edition: RecommendedAge: ISBN: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
+
+INFO: 2025/01/28 22:52:40 Successfully updated book = {ID:14b14765-166c-470f-be57-a06586cc30d1 Title:Book-2 Author:Author-2 PublishedDate:1990-04-10 PublishedBy: CoAuthors: Genre: Description: Edition: RecommendedAge: ISBN: CreatedAt:2025-01-28 22:43:46.5754829 -0800 PST m=+260.429244801 UpdatedAt:2025-01-28 22:52:40.3224857 -0800 PST m=+794.152876401}
+
+INFO: 2025/01/28 22:52:40 Successfully updated book with ID: 14b14765-166c-470f-be57-a06586cc30d1
+INFO: 2025/01/28 22:55:41 Successfully fetched all exsiting books
+INFO: 2025/01/28 22:56:25 Delete Book service: id=91d43740-ed13-4d07-9514-bedf61857511
+
+ERROR: 2025/01/28 22:56:25 Book [91d43740-ed13-4d07-9514-bedf61857511] not found.
+ERROR: 2025/01/28 22:56:25 Error deleting book: Book [91d43740-ed13-4d07-9514-bedf61857511] not found.
