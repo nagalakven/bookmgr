@@ -50,9 +50,7 @@ For a standard synchronous operation, the following JSON object is returned:
 
 ```js
 {
-    "status": "Success",
-    "status_code": 200,
-    "metadata": {}          //free form response based on the operation
+    "data": {}          //free form response based on the operation
 }
 ```
 
@@ -60,16 +58,13 @@ HTTP code must be 200.
 
 ## Error Handling
 
-If an error occurs during an API request, the response will contain an error object with the status and details of the issue.
+If an error occurs during an API request, the response will contain an error response with the details of the issue.
 
 ### Example Error Response
 
 ```json
 {
-    "type": "error",
-    "error": "Failure",
-    "error_code": 400,
-    "message": "Invalid request payload!"
+    "error": "<error message>"
 }
 ```
 
@@ -100,6 +95,8 @@ Use the `limit` query parameters to paginate through results.
 ```http
 GET /api/v1/books?limit=10
 ```
+
+TODO: Implementation to be done
 
 ## Asynchronous Operations
 
