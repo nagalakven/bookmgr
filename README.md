@@ -50,7 +50,7 @@ The following assumptions are made for the purpose of this assignment.
 This is a minimalistic implementation and needs more optimization.
 
 1. Instead of integrating with a database, the service utilizes an in-memory storage.
-2. Code is structured to flow as follows: main -> handler -> service -> respository.
+2. Code is structured to flow as follows: main -> handler -> service -> repository.
 3. The server is exposed via simple HTTP endpoints.
 4. Basic validations are handled.
 5. The service handles CRUD operations for books. These are the operations implemented:
