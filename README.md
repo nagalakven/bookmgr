@@ -37,10 +37,10 @@ The design documents for the assignment are found in the repository under bookmg
 
 1. [CLI user specification](docs/cli_user_guide.md)
 2. [Database design specification](docs/database_design.md)
-3. [REST API documentation](../bookmgr/docs/rest-api.md)
-4. [OpenAPI specification](../bookmgr/docs/rest-api.yaml)
-5. [Unit test results](../bookmgr/docs/tests/test_results.md)
-6. [Sample log file](../bookmgr/log/app.20250128_223926.log)
+3. [REST API documentation](docs/rest-api.md)
+4. [OpenAPI specification](docs/rest-api.yaml)
+5. [Unit test results](docs/tests/test_results.md)
+6. [Sample log file](log/app.20250128_223926.log)
 
 ## Assumptions and Future Enhancements
 
