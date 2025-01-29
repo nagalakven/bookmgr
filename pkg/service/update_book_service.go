@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"bookmgr/pkg/entity"
@@ -12,14 +13,17 @@ import (
 // Implements the UpdateBook method of the BookService interface
 func (s *BookServiceImpl) UpdateBook(ctx context.Context, id string, updatedBook entity.Book) (*entity.Book, error) {
 
+	logMsg := fmt.Sprintf("Update Book service: id=%s, book=%+v\n", id, updatedBook)
+	logger.LogMessage(logger.INFO, logMsg, false)
+
 	// Validation
 	if id == "" {
-		errmsg := "Validation failed: book ID is required for updation"
+		errmsg := "validation failed: book ID is required for updation"
 		logger.LogMessage(logger.ERROR, errmsg, true)
 		return nil, errors.New(errmsg)
 	}
 
-	// set updated time
+	// set updated time and id
 	updatedBook.UpdatedAt = time.Now()
 
 	recvBook, err := s.repo.UpdateBook(id, updatedBook)

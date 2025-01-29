@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"bookmgr/pkg/entity"
@@ -14,12 +15,17 @@ import (
 // Business logic for adding a new book
 func (s *BookServiceImpl) AddBook(ctx context.Context, book entity.Book) (*entity.Book, error) {
 
+	logMsg := fmt.Sprintf("Add Book service: book=%+v\n", book)
+	logger.LogMessage(logger.INFO, logMsg, false)
+
 	// Validation
-	if book.Title == "" || book.Author == "" || book.PublishedDate.IsZero() {
-		errmsg := "Validation failed: title, author and published date are required"
+	if book.Title == "" || book.Author == "" || book.PublishedDate == "" {
+		errmsg := "validation failed: title, author and published date are required"
 		logger.LogMessage(logger.ERROR, errmsg, true)
 		return nil, errors.New(errmsg)
 	}
+
+	// TODO: Validate if book with same mandatory params is added again
 
 	// Generate UUID and timestamps
 	book.ID = uuid.New().String()

@@ -4,6 +4,7 @@ import (
 	"bookmgr/pkg/entity"
 	"bookmgr/pkg/logger"
 	"errors"
+	"fmt"
 	"sync"
 )
 
@@ -49,7 +50,10 @@ func (r *BookRepository) AddBook(book entity.Book) (*entity.Book, error) {
 
 	//return added content from DB
 	val := r.booksDB[book.ID]
-	logger.LogMessage(logger.INFO, "Successfully added book with ID: "+book.ID, false)
+
+	logMsg := fmt.Sprintf("Successfully added book = %+v\n", val)
+	logger.LogMessage(logger.INFO, logMsg, false)
+
 	return &val, nil
 }
 
@@ -81,18 +85,19 @@ func (r *BookRepository) UpdateBook(id string, updatedBook entity.Book) (*entity
 
 	//validate if book exists
 	if currBook, exists := r.booksDB[id]; exists {
-		if currBook.ID != updatedBook.ID {
-			errmsg := "Book ID mismatch: existing - " + currBook.ID + " updated - " + updatedBook.ID + "."
-			logger.LogMessage(logger.ERROR, errmsg, true)
-			return nil, errors.New(errmsg)
-		}
+
+		//retain auto-generated fields
+		updatedBook.ID = currBook.ID
+		updatedBook.CreatedAt = currBook.CreatedAt
 
 		//update DB
 		r.booksDB[id] = updatedBook
 
 		//return updated val from DB
 		val := r.booksDB[id]
-		logger.LogMessage(logger.INFO, "Successfully updated book with ID: "+id, false)
+
+		logMsg := fmt.Sprintf("Successfully updated book = %+v\n", val)
+		logger.LogMessage(logger.INFO, logMsg, false)
 
 		return &val, nil
 	} else {

@@ -10,7 +10,7 @@ type Book struct {
 	ID             string    `json:"id"`
 	Title          string    `json:"title"`
 	Author         string    `json:"author"`
-	PublishedDate  time.Time `json:"published_date"`
+	PublishedDate  string    `json:"published_date"`
 	PublishedBy    string    `json:"published_by,omitempty"`
 	CoAuthors      string    `json:"co_authors,omitempty"`
 	Genre          string    `json:"genre,omitempty"`

@@ -16,14 +16,13 @@ import (
 
 func initHTTPServer(r *mux.Router) *http.Server {
 	srv := &http.Server{Handler: r}
-	portStr := fmt.Sprintf(":%d", config.AppConfig.HTTP.Port)
-	srv.Addr = ":" + portStr
 
+	srv.Addr = fmt.Sprintf(":%d", config.AppConfig.HTTP.Port)
 	srv.ReadTimeout = time.Duration(config.AppConfig.HTTP.ReadTimeout) * time.Second
 	srv.WriteTimeout = time.Duration(config.AppConfig.HTTP.WriteTimeout) * time.Second
 	srv.MaxHeaderBytes = config.AppConfig.HTTP.MaxHeaderBytes
 
-	logMsg := fmt.Sprintf("HTTP server params - addr[%s] readTimeout[%d] writeTimeout[%d] maxHdrBytes[%d] : ",
+	logMsg := fmt.Sprintf("HTTP server params - addr[%s] readTimeout[%d] writeTimeout[%d] maxHdrBytes[%d]\n",
 		srv.Addr, srv.ReadTimeout, srv.WriteTimeout, srv.MaxHeaderBytes)
 	logger.LogMessage(logger.INFO, logMsg, false)
 
@@ -60,6 +59,7 @@ func main() {
 	config.LoadConfig(constant.CFG_PATH)
 
 	// Start HTTP server
+	logger.LogMessage(logger.INFO, "Starting Bookmgr service...", true)
 	if err := (initHTTPServer(router).ListenAndServe()); err != nil {
 		logger.LogMessage(logger.ERROR, "Could not start server: "+err.Error(), true)
 	}

@@ -25,5 +25,9 @@ func (h *BookHandler) UpdateBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.WriteSuccessResponse(w, recvBook, http.StatusOK)
+	responseMsg := map[string]interface{}{
+		"message":      "Book updated successfully!",
+		"id":           recvBook.ID,
+		"updated book": recvBook}
+	response.WriteSuccessResponse(w, response.Response{Data: responseMsg}, http.StatusOK)
 }

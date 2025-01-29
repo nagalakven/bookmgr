@@ -14,5 +14,8 @@ func (h *BookHandler) GetBooks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.WriteSuccessResponse(w, booksList, http.StatusOK)
+	responseMsg := map[string]interface{}{
+		"message": "List of Books",
+		"books":   booksList}
+	response.WriteSuccessResponse(w, response.Response{Data: responseMsg}, http.StatusOK)
 }

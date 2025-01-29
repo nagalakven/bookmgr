@@ -17,18 +17,16 @@ paths:
               $ref: '#/components/schemas/BookWithRequiredField'
       responses:
         '201':
-          description: Book added successfully!
+          description: Book added successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                  id:
-                    type: string
+                  data:
+                    type: object
         '400':
-          description: Invalid request payload!
+          description: Invalid request payload.
           
     get:
       summary: List All Books
@@ -52,13 +50,14 @@ paths:
             enum: [asc, desc]
       responses:
         '200':
-          description: List of books!
+          description: List of books.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+                type: object
+                properties:
+                  data:
+                    type: object
                   
   /books/{id}:
     delete:
@@ -74,16 +73,16 @@ paths:
             type: string
       responses:
         '200':
-          description: Book deleted successfully!
+          description: Book deleted successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  data:
+                    type: object
         '404':
-          description: Book not found!
+          description: Book not found.
 
     put:
       summary: Update a book by ID
@@ -104,15 +103,16 @@ paths:
               $ref: '#/components/schemas/Book'
       responses:
         '200':
-          description: Book updated successfully!
+          description: Book updated successfully.
           content:
             application/json:
               schema:
                 type: object
-                items:
-                  $ref: '#/components/schemas/Book'
+                properties:
+                  data:
+                    type: object
         '404':
-          description: Book not found!
+          description: Book not found.
 
   /books/filter:
     post:
@@ -154,13 +154,14 @@ paths:
                    - `custom`: Reserved for future extensions and custom format.
       responses:
         '200':
-          description: Filtered books!
+          description: Filtered books.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+                type: object
+                properties:
+                  data:
+                    type: object
 
   /books/delete-by-filter:
     post:
@@ -190,26 +191,14 @@ paths:
                   description: Delete books published on or before the specified end date.
       responses:
         '200':
-          description: Books deleted successfully!
+          description: Books deleted successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    description: Response message.
-                  totalDeleted:
-                    type: integer
-                    description: Number of books that were deleted.
-                  deletedBookIds:
-                    type: array
-                    items:
-                      type: string
-                    description: List of unique identifiers of the books that were deleted.
-        '404':
-          description: No books matched the criteria!
-          
+                  data:
+                    type: object
           
   /collections:
     post:
@@ -230,18 +219,16 @@ paths:
                 - name
       responses:
         '201':
-          description: Collection created successfully!
+          description: Collection created successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                  id:
-                    type: string
+                  data:
+                    type: object
         '400':
-          description: Invalid request payload!
+          description: Invalid request payload.
           
     get:
       summary: List All Collections
@@ -253,14 +240,10 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    name:
-                      type: string
+                type: object
+                properties:
+                  data:
+                    type: object
 
   /collections/{collectionId}/books:
     post:
@@ -290,18 +273,18 @@ paths:
                 - bookIds
       responses:
         '200':
-          description: Books added to the collection successfully!
+          description: Books added to the collection successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  data:
+                    type: object
         '400':
-          description: Invalid request payload!
+          description: Invalid request payload.
         '404':
-          description: Collection not found!
+          description: Collection not found.
 
     delete:
       summary: Remove Books from Collection
@@ -326,18 +309,18 @@ paths:
           explode: true
       responses:
         '200':
-          description: Books removed from the collection successfully!
+          description: Books removed from the collection successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  data:
+                    type: object
         '400':
-          description: Invalid request payload!
+          description: Invalid request payload.
         '404':
-          description: Collection not found!
+          description: Collection not found.
     
     get:
       summary: List All Books in a Collection
@@ -351,20 +334,16 @@ paths:
             type: string
       responses:
         '200':
-          description: A list of books in the collection!
+          description: A list of books in the collection.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  books:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Book'
-                  totalCount:
-                    type: integer
+                  data:
+                    type: object
         '404':
-          description: Collection not found!
+          description: Collection not found.
 
   /collections/{collectionId}:
     delete:
@@ -386,10 +365,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  data:
+                    type: object
         '404':
-          description: Collection not found!
+          description: Collection not found.
 
 components:
   schemas:

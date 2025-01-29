@@ -22,5 +22,10 @@ func (h *BookHandler) AddBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.WriteSuccessResponse(w, createdBook, http.StatusCreated)
+	responseMsg := map[string]interface{}{
+		"message": "Book added successfully!",
+		"id":      createdBook.ID,
+		"book":    createdBook}
+
+	response.WriteSuccessResponse(w, response.Response{Data: responseMsg}, http.StatusCreated)
 }

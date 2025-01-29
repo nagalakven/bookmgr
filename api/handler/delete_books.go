@@ -18,5 +18,6 @@ func (h *BookHandler) DeleteBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.WriteSuccessResponse(w, map[string]string{"message": "Book deleted successfully!"}, http.StatusOK)
+	responseMsg := map[string]string{"message": "Book deleted successfully!"}
+	response.WriteSuccessResponse(w, response.Response{Data: responseMsg}, http.StatusOK)
 }
